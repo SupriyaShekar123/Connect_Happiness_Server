@@ -6,8 +6,8 @@ module.exports = {
       "users",
       [
         {
-          firstName: "John",
-          lastName: "Smith",
+          name: "John",
+
           email: "test@test.com",
           password: "test1234",
           createdAt: new Date(),
@@ -22,8 +22,8 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          firstName: "Mark",
-          lastName: "Miller",
+          name: "Mark",
+
           email: "dummy@dummy.com",
           password: "dummy1234",
           createdAt: new Date(),
@@ -38,8 +38,8 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          firstName: "Michal",
-          lastName: "Jackson",
+          name: "Michal",
+
           email: "michal@jackson.com",
           password: "michale1234",
           createdAt: new Date(),
@@ -54,8 +54,8 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          firstName: "Rose",
-          lastName: "Samuel",
+          name: "Rose",
+
           email: "rose@samuel.com",
           password: "rose1234",
           createdAt: new Date(),
