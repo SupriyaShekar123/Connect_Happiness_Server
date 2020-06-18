@@ -7,7 +7,36 @@ const { SALT_ROUNDS } = require("../config/constants");
 
 const router = new Router();
 
+router.post("/login", async (req, res, next) => {
+  console.log("Request Body", req.body);
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .send({ message: "Please provide both email and password" });
+    }
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      return res.status(400).send({
+        message: "User with that email not found or password incorrect",
+      });
+    } else if (user && bcrypt.compareSync(password, user.password)) {
+      delete user.dataValues["password"]; // don't send back the password hash
+      const token = toJWT({ userId: user.id });
+      return res.status(200).send({ token, ...user.dataValues });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
 router.post("/signup", async (req, res) => {
+  console.log(req.body);
   const {
     email,
     password,
@@ -17,6 +46,7 @@ router.post("/signup", async (req, res) => {
     city,
     phone,
     dob,
+    street,
   } = req.body;
   if (
     !email ||
@@ -28,7 +58,7 @@ router.post("/signup", async (req, res) => {
     !phone ||
     !dob
   ) {
-    return res.status(400).send("Please provide an all the needed information");
+    return res.status(400).send("Please provide  all the needed information");
   }
 
   try {
@@ -41,6 +71,7 @@ router.post("/signup", async (req, res) => {
       city,
       phone,
       dob,
+      street,
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
