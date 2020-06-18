@@ -4,13 +4,13 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn(
       "users",
-      "dob",
-      { type: Sequelize.DATEONLY },
+      "roles",
+      { type: Sequelize.STRING },
       {}
     );
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("users", "dob", {});
+    await queryInterface.removeColumn("users", "roles", {});
   },
 };
