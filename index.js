@@ -12,6 +12,7 @@ app.use(cors());
 //const app = express();
 
 app.use("/events", Events);
+app.use("/:id", Events);
 //app.use("/bid", bids);
 
 /**
