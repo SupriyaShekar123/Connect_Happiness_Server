@@ -1,11 +1,18 @@
 const express = require("express");
+const app = express();
 const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
 const { PORT } = require("./config/constants");
 const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
+const Events = require("./routers/events");
+const cors = require("cors");
+app.use(cors());
 
-const app = express();
+//const app = express();
+
+app.use("/events", Events);
+//app.use("/bid", bids);
 
 /**
  * Middlewares
