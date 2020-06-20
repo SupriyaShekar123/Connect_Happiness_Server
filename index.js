@@ -1,11 +1,35 @@
 const express = require("express");
+const app = express();
 const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
 const { PORT } = require("./config/constants");
 const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
+const Events = require("./routers/events");
+//const SSE = require("./routers/sse");
+const cors = require("cors");
+app.use(cors());
 
-const app = express();
+//const app = express();
+//app.use("/stream", SSE);
+app.use("/events", Events);
+app.use("/:id", Events);
+
+// app.get("/stream", (req, res) => {
+//   res.status(200).set({
+//     "Content-Type": "text/event-stream",
+//     "Cache-Control": "no-cache",
+//     Connection: "keep-alive",
+
+//     // enabling CORS
+//     "Access-Control-Allow-Origin": "*",
+//     "Access-Control-Allow-Headers":
+//       "Origin, X-Requested-With, Content-Type, Accept",
+//   });
+
+//   res.write(`data: Hello world \n\n`);
+// });
+//app.use("/bid", bids);
 
 /**
  * Middlewares

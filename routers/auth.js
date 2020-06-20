@@ -47,6 +47,7 @@ router.post("/signup", async (req, res) => {
     phone,
     dob,
     street,
+    roles,
   } = req.body;
   if (
     !email ||
@@ -56,7 +57,8 @@ router.post("/signup", async (req, res) => {
     !postcode ||
     !city ||
     !phone ||
-    !dob
+    !dob ||
+    !street
   ) {
     return res.status(400).send("Please provide  all the needed information");
   }
@@ -72,6 +74,7 @@ router.post("/signup", async (req, res) => {
       phone,
       dob,
       street,
+      roles,
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
