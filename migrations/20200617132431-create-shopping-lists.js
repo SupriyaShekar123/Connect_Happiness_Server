@@ -1,21 +1,24 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('shoppinglists', {
+    return queryInterface.createTable('shoppingLists', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groceries: {
+      category: {
         type: Sequelize.STRING
       },
-      medicines: {
+      list: {
         type: Sequelize.STRING
       },
-      qty: {
+      volunteerId: {
         type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('shoppinglists');
+    return queryInterface.dropTable('shoppingLists');
   }
 };

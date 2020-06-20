@@ -1,17 +1,13 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const shoppinglists = sequelize.define(
-    "shoppinglists",
-    {
-      groceries: DataTypes.STRING,
-      medicines: DataTypes.STRING,
-      qty: DataTypes.INTEGER,
-    },
-    {}
-  );
-  shoppinglists.associate = function (models) {
-    shoppinglists.belongsTo(models.user);
+  const shoppingLists = sequelize.define('shoppingLists', {
+    category: DataTypes.STRING,
+    list: DataTypes.STRING,
+    volunteerId: DataTypes.INTEGER,
+    status: DataTypes.STRING
+  }, {});
+  shoppingLists.associate = function(models) {
     // associations can be defined here
   };
-  return shoppinglists;
+  return shoppingLists;
 };
