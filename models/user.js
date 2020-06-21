@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       phone: DataTypes.INTEGER,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-
       dob: DataTypes.DATEONLY,
       roles: DataTypes.STRING,
     },
@@ -19,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   user.associate = function (models) {
     user.hasMany(models.events);
-    user.hasOne(models.shoppinglists);
+    user.hasOne(models.shoppinglist);
 
     // associations can be defined here
   };

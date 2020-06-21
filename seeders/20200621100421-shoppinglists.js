@@ -6,15 +6,15 @@ module.exports = {
       "shoppinglists",
       [
         {
-          groceries: "Tomatoes",
-          qty: 4,
+          category: "groceries",
+          list: "tomatoe:3,milk:1,onion:4",
           userId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          groceries: "Onions",
-          qty: 4,
+          category: "groceries",
+          list: "tomatoe:10,Oatsmilk:2,onion:4",
           userId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -25,6 +25,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("events", null, {});
+    return queryInterface.bulkDelete("shoppinglists", null, {});
   },
 };

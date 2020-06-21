@@ -8,14 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      groceries: {
+      category: {
         type: Sequelize.STRING
       },
-      medicines: {
+      list: {
         type: Sequelize.STRING
       },
-      qty: {
+      volunteerId: {
         type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
