@@ -3,25 +3,19 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "shoppingLists",
+      "shoppinglists",
       [
         {
-          category: "Groceries",
-          list: "onion:4,milk:1,greentea:1,bread:1",
+          category: "groceries",
+          list: "tomatoe:3,milk:1,onion:4",
           userId: 2,
-          volunteerId: 1,
-          status: "In process",
-
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          category: "Groceries",
-          list: "onion:4,milk:1,greentea:1,bread:1,soap:4",
+          category: "groceries",
+          list: "tomatoe:10,Oatsmilk:2,onion:4",
           userId: 3,
-          volunteerId: 4,
-          status: "In process",
-
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -31,6 +25,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("events", null, {});
+    return queryInterface.bulkDelete("shoppinglists", null, {});
   },
 };

@@ -1,19 +1,24 @@
 const express = require("express");
 const app = express();
-const loggerMiddleWare = require("morgan");
+// const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
 const { PORT } = require("./config/constants");
 const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
 const Events = require("./routers/events");
 //const SSE = require("./routers/sse");
+const Shopping = require("./routers/shopping");
 const cors = require("cors");
-app.use(cors());
 
+app.use(cors());
+const jsonParser = express.json();
+app.use(jsonParser);
+//
 //const app = express();
 //app.use("/stream", SSE);
-app.use("/events", Events);
-app.use("/:id", Events);
+// app.use("/shopping", Shopping);
+// app.use("/events", Events);
+// app.use("/:id", Events);
 
 // app.get("/stream", (req, res) => {
 //   res.status(200).set({
@@ -57,7 +62,7 @@ app.use("/:id", Events);
  *
  */
 
-app.use(loggerMiddleWare("dev"));
+//app.use(loggerMiddleWare("dev"));
 
 /**
  *
@@ -175,6 +180,19 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
 });
 
 app.use("/", authRouter);
+app.use("/", Shopping);
+
+//app.use("/:id", Events);
+app.use("/", Events);
+app.all("*", function (req, res) {
+  throw new Error("Bad request");
+});
+
+app.use(function (e, req, res, next) {
+  if (e.message === "Bad request") {
+    res.status(400).json({ error: { msg: e.message, stack: e.stack } });
+  }
+});
 
 // Listen for connections on specified port (default is port 4000)
 

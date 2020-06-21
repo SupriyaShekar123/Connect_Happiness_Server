@@ -36,7 +36,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
+  console.log("here it comes", req.body);
   const {
     email,
     password,
@@ -64,6 +64,7 @@ router.post("/signup", async (req, res) => {
   }
 
   try {
+    console.log("this part of code executed ");
     const newUser = await User.create({
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
@@ -84,11 +85,12 @@ router.post("/signup", async (req, res) => {
     res.status(201).json({ token, ...newUser.dataValues });
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
+      console.log("ERROr: ", error.message);
       return res
         .status(400)
         .send({ message: "There is an existing account with this email" });
     }
-
+    console.log("testinge error ", error.message);
     return res.status(400).send({ message: "Something went wrong, sorry" });
   }
 });
