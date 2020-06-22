@@ -8,7 +8,7 @@ const { Router } = express;
 const router = new Router();
 console.log("Shopping", Shopping);
 
-router.get("/", async function getEventsList(req, res, next) {
+router.get("/shopping", async function getEventsList(req, res, next) {
   try {
     const getData = await Shopping.findAll();
 

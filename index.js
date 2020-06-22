@@ -8,7 +8,18 @@ const authMiddleWare = require("./auth/middleware");
 const Events = require("./routers/events");
 const SSE = require("./routers/sse");
 const Shopping = require("./routers/shopping");
+const Email = require("./routers/nodeMailer");
+const User = require("./routers/users");
 const cors = require("cors");
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use(cors());
 const jsonParser = express.json();
@@ -182,9 +193,11 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
 app.use("/", authRouter);
 app.use("/", Shopping);
 app.use("/", SSE);
+app.use("/", Email);
 
 //app.use("/:id", Events);
 app.use("/", Events);
+app.use("/", User);
 app.all("*", function (req, res) {
   throw new Error("Bad request");
 });
