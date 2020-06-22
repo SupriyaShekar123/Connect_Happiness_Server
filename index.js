@@ -6,7 +6,7 @@ const { PORT } = require("./config/constants");
 const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
 const Events = require("./routers/events");
-//const SSE = require("./routers/sse");
+const SSE = require("./routers/sse");
 const Shopping = require("./routers/shopping");
 const cors = require("cors");
 
@@ -181,6 +181,7 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
 
 app.use("/", authRouter);
 app.use("/", Shopping);
+app.use("/", SSE);
 
 //app.use("/:id", Events);
 app.use("/", Events);
