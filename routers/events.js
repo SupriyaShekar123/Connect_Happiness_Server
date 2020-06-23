@@ -15,6 +15,8 @@ router.get("/events", async function getEventsList(req, res, next) {
   }
 });
 
+console.log("Events", Events.params);
+
 // router.get("/:id", async function getEventsList(req, res, next) {
 //   try {
 //     const getData = await Events.findAll();

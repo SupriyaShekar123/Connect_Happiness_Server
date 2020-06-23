@@ -10,7 +10,7 @@ module.exports = {
         {
           name: "John",
 
-          email: "test@test.com",
+          email: "Drishika4u@gmail.com",
           password: bcrypt.hashSync("test1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -27,7 +27,7 @@ module.exports = {
         {
           name: "Mark",
 
-          email: "dummy@dummy.com",
+          email: "giridhar97@gmail.com",
           password: bcrypt.hashSync("dummy@1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -44,7 +44,7 @@ module.exports = {
         {
           name: "Michal",
 
-          email: "michal@jackson.com",
+          email: "Drishika4u@gmail.com",
           password: bcrypt.hashSync("michale1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -61,7 +61,7 @@ module.exports = {
         {
           name: "Rose",
 
-          email: "rose@samuel.com",
+          email: "s.supriya82@gmail.com",
           password: bcrypt.hashSync("rose1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -78,7 +78,7 @@ module.exports = {
         {
           name: "Smitha",
 
-          email: "test1@test.com",
+          email: "karthikshekar963@gmail.com",
           password: bcrypt.hashSync("test12345", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
