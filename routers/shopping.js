@@ -43,4 +43,14 @@ router.post("/shopping", async (req, res, next) => {
   }
 });
 
+router.get("/shopping", async function getEventsList(req, res, next) {
+  try {
+    const getShoppingLists = await Shopping.findAll();
+
+    res.json(getShoppingLists);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
