@@ -32,35 +32,35 @@ router.get("/volunteer", async function getVolunteers(req, res, next) {
   }
 });
 
-router.get("/volunteerEmail", async function getVolunteers(req, res, next) {
-  try {
-    const volunteers = await User.findAll({
-      include: [
-        {
-          attributes: ["email"],
-          where: {
-            roles: {
-              [Op.like]: "%volunteer%",
-            },
-          },
-        },
-      ],
-    });
+// router.get("/volunteerEmail", async function getVolunteers(req, res, next) {
+//   try {
+//     const volunteers = await User.findAll({
+//       include: [
+//         {
+//           attributes: ["email"],
+//           where: {
+//             roles: {
+//               [Op.like]: "%volunteer%",
+//             },
+//           },
+//         },
+//       ],
+//     });
 
-    res.json(volunteers);
-  } catch (e) {
-    next(e);
-  }
-});
+//     res.json(volunteers);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
-router.get("/user", async function getVolunteers(req, res, next) {
-  try {
-    const volunteers = await User.findAll();
+// router.get("/user", async function getVolunteers(req, res, next) {
+//   try {
+//     const volunteers = await User.findAll();
 
-    res.json(volunteers);
-  } catch (e) {
-    next(e);
-  }
-});
+//     res.json(volunteers);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
 module.exports = router;
