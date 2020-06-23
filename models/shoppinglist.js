@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       category: DataTypes.STRING,
       list: DataTypes.STRING,
       volunteerId: DataTypes.INTEGER,
-      status: DataTypes.STRING,
+      status: {
+        type: DataTypes.STRING,
+        defaultValue: "open",
+      },
     },
     {}
   );

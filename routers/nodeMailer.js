@@ -3,6 +3,7 @@ var router = express.Router();
 var nodemailer = require("nodemailer");
 const creds = require("../config/conifg");
 const User = require("../models/").user;
+const Shopping = require("../models/").shoppinglist;
 const { Op } = require("sequelize");
 
 var transport = {
@@ -74,6 +75,22 @@ async function getVolunteerEmail() {
     return "Fail";
   }
 }
+
+// async function getShoppingListId() {
+//   try {
+//     const lists = await Shopping.findAll();
+//     const id = lists.map((t) => {
+//       console.log(t.dataValues.id);
+//       return (
+//         //
+//         t.dataValues.id
+//       );
+//     });
+//     return id;
+//   } catch (e) {
+//     return "Fail";
+//   }
+// }
 router.post("/send", async (req, res, next) => {
   //   var name = "Volunteers"; //req.body.name;
   //   var message = "Help needed in shopping"; //req.body.message;
@@ -81,6 +98,9 @@ router.post("/send", async (req, res, next) => {
 
   let emailid = await getVolunteerEmail();
   console.log("return from funciton :", emailid);
+
+  //   let id = await getShoppingListId();
+  //   console.log("return lists", id);
 
   var mail = {
     from: "connecthappinesssnode@gmail.com",
