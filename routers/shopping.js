@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const Shopping = require("../models/").shoppinglist;
+const User = require("../models/").user;
 //'const Bids = require("../models/").bid;
 //console.log("Artwork", Artwork);
 const { Router } = express;
@@ -8,15 +9,15 @@ const { Router } = express;
 const router = new Router();
 console.log("Shopping", Shopping);
 
-router.get("/shopping", async function getEventsList(req, res, next) {
-  try {
-    const getData = await Shopping.findAll();
+// router.get("/shopping", async function getEventsList(req, res, next) {
+//   try {
+//     const getData = await Shopping.findAll();
 
-    res.json(getData);
-  } catch (e) {
-    next(e);
-  }
-});
+//     res.json(getData);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
 router.post("/shopping", async (req, res, next) => {
   console.log("requested values ", req.body);
@@ -43,11 +44,26 @@ router.post("/shopping", async (req, res, next) => {
   }
 });
 
-router.get("/shopping", async function getEventsList(req, res, next) {
+router.get("/shopping", async function getShoppingList(req, res, next) {
   try {
-    const getShoppingLists = await Shopping.findAll();
+    const getShoppingLists = await Shopping.findAll({
+      include: [User],
+    });
 
     res.json(getShoppingLists);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.get("/shopping/:id", async function getShoppingDetails(req, res, next) {
+  const Id = req.params.id;
+  try {
+    const getData = await Shopping.findByPk(Id, {
+      include: [User],
+    });
+
+    res.json(getData);
   } catch (e) {
     next(e);
   }

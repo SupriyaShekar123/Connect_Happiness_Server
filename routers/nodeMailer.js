@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var nodemailer = require("nodemailer");
-const creds = require("../config/coy");
+const creds = require("../config/conifg");
 const User = require("../models/").user;
 const { Op } = require("sequelize");
 
@@ -88,6 +88,7 @@ router.post("/send", async (req, res, next) => {
     subject: "NEED  ASSISTANCE FOR ",
     text:
       "Hello Volunteers, \n User, needs assitance for shopping can someone help. please login to the app and connect with respective person \nThanks and Regards,\n Team ConnectHappiness ",
+    html: '<p>Click <a href="http://localhost:3000/shoppingDetails/1">here</a>',
   };
 
   //   console.log("message", message, name, email);

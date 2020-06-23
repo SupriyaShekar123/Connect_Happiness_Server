@@ -16,7 +16,7 @@ router.get("/stream", (req, res) => {
   res.writeHead(200, headers);
 
   //const data = { data: "Hello supriya \n\n" };
-  res.write(`data: Hello world Giridhar \n\n`);
+  res.write(`data: Hello world \n\n`);
 
   //   setInterval(() => {
   //     data.timestamp = Date.now();
