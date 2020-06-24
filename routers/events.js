@@ -57,6 +57,7 @@ router.post("/events", async (req, res) => {
       res.json(event);
     }
   } catch (e) {
+    console.log(e.message);
     // next(e);
   }
 });

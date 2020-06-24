@@ -10,6 +10,7 @@ const SSE = require("./routers/sse");
 const Shopping = require("./routers/shopping");
 const Email = require("./routers/nodeMailer");
 const User = require("./routers/users");
+const Participents = require("./routers/participents");
 const cors = require("cors");
 
 app.use(function (req, res, next) {
@@ -198,6 +199,7 @@ app.use("/", Email);
 //app.use("/:id", Events);
 app.use("/", Events);
 app.use("/", User);
+app.use("/", Participents);
 app.all("*", function (req, res) {
   throw new Error("Bad request");
 });
