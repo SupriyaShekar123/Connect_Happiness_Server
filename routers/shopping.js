@@ -69,4 +69,20 @@ router.get("/shopping/:id", async function getShoppingDetails(req, res, next) {
   }
 });
 
+router.patch("/shopping/:id", async (req, res, next) => {
+  console.log("THE BODAY", req.body);
+  try {
+    const Id = parseInt(req.params.id);
+    const toUpdate = await Shopping.findByPk(Id);
+    if (!toUpdate) {
+      res.status(404).send("List not found");
+    } else {
+      const updated = await toUpdate.update(req.body);
+      res.json(updated);
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
 module.exports = router;
