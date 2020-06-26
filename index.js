@@ -10,6 +10,7 @@ const SSE = require("./routers/sse");
 const Shopping = require("./routers/shopping");
 const Email = require("./routers/nodeMailer");
 const User = require("./routers/users");
+const Reminder = require("./routers/reminder");
 const Participents = require("./routers/participents");
 const cors = require("cors");
 
@@ -195,6 +196,7 @@ app.use("/", authRouter);
 app.use("/", Shopping);
 app.use("/", SSE);
 app.use("/", Email);
+app.use("/", Reminder);
 
 //app.use("/:id", Events);
 app.use("/", Events);

@@ -26,4 +26,32 @@ router.post("/participents", async (req, res) => {
   }
 });
 
+// router.get("/participents", async function getEventsList(req, res, next) {
+//   try {
+//     const getData = await Participents.findAll({
+//       where: {
+//         eventId: {
+//           include: [Events],
+//         },
+//       },
+//     });
+
+//     res.json(getData);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
+
+// router.get("/part/:id", async (req, res) => {
+//   const Id = parseInt(req.params.id);
+//   const events = await Events.findByPk(1, {
+//     include: [Participents],
+//   });
+//   if (!events) {
+//     res.status(404).send("Events not found");
+//   } else {
+//     res.json(events);
+//   }
+// });
+
 module.exports = router;

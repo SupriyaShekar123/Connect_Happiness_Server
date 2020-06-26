@@ -3,16 +3,16 @@ module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define(
     "user",
     {
-      name: DataTypes.STRING,
-      house_num: DataTypes.INTEGER,
-      street: DataTypes.STRING,
-      postcode: DataTypes.STRING,
-      city: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      dob: DataTypes.DATEONLY,
-      roles: DataTypes.STRING,
+      name: { type: DataTypes.STRING, allowNull: false },
+      house_num: { type: DataTypes.INTEGER, allowNull: false },
+      street: { type: DataTypes.STRING, allowNull: false },
+      postcode: { type: DataTypes.STRING, allowNull: false },
+      city: { type: DataTypes.STRING, allowNull: false },
+      phone: { type: DataTypes.INTEGER, allowNull: false },
+      email: { type: DataTypes.STRING, allowNull: false },
+      password: { type: DataTypes.STRING, allowNull: false },
+      dob: { type: DataTypes.DATEONLY, allowNull: false },
+      roles: { type: DataTypes.STRING, allowNull: false },
     },
     {}
   );
