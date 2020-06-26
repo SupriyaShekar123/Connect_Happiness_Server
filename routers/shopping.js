@@ -18,7 +18,7 @@ router.post("/shopping", async (req, res, next) => {
     const { category, list, userId } = req.body;
 
     if (!category || !list || !userId) {
-      res.status(400).send("Missing parameters ");
+      res.status(400).send({ message: "Missing parameters " });
     } else {
       const shoppinglist = await Shopping.create({
         category,
