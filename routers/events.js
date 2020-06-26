@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const Events = require("../models/").events;
+const Participents = require("../models/").participents;
 const { Router } = express;
 
 const router = new Router();
@@ -15,7 +16,7 @@ router.get("/events", async function getEventsList(req, res, next) {
   }
 });
 
-console.log("Events", Events.params);
+//console.log("Events", Events.params);
 
 // router.get("/:id", async function getEventsList(req, res, next) {
 //   try {
@@ -29,13 +30,27 @@ console.log("Events", Events.params);
 
 router.get("/events/:id", async (req, res) => {
   const Id = parseInt(req.params.id);
-  const events = await Events.findByPk(Id);
+  const events = await Events.findByPk(Id, {
+    include: [Participents],
+  });
   if (!events) {
     res.status(404).send("Events not found");
   } else {
     res.json(events);
   }
 });
+
+// router.get("/events/:id", async (req, res) => {
+//   const Id = parseInt(req.params.id);
+//   const events = await Participents.findByPk(Id, {
+//     include: [Events],
+//   });
+//   if (!events) {
+//     res.status(404).send("Events not found");
+//   } else {
+//     res.json(events);
+//   }
+// });
 
 router.post("/events", async (req, res) => {
   // console.log("reqeust body", req.body);

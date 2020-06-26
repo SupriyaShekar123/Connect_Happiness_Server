@@ -6,13 +6,14 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.TEXT,
       detail: DataTypes.STRING,
       imageUrl: DataTypes.STRING,
-      date: DataTypes.INTEGER,
+      date: DataTypes.DATE,
       location: DataTypes.STRING,
     },
     {}
   );
   events.associate = function (models) {
     events.belongsTo(models.user);
+    events.hasMany(models.participents);
     // associations can be defined here
   };
   return events;

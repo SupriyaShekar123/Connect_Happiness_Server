@@ -10,7 +10,7 @@ module.exports = {
           detail: "Its for people who want to learn Dutch.",
           imageUrl:
             "https://www.taalcoachwijzer.nl/wp-content/uploads/2016/04/SandraEiman-691jpg.jpg",
-          date: 2020725,
+          date: "2020-01-01T08:00:00.000Z",
           location: "Amstelveen,Netherlands",
           userId: 2,
           createdAt: new Date(),
@@ -21,7 +21,7 @@ module.exports = {
           detail: "Its a event where people come and cook together",
           imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTyD4zow0BpsUmx8cnEuFPbK5UutHvzMVPUxEl5qit9ZOfEGL7I&usqp=CAU",
-          date: 15072020,
+          date: "2018-01-01T08:00:00.000Z",
           location: "Amstelveen,Netherlands",
           userId: 3,
           createdAt: new Date(),
@@ -33,7 +33,7 @@ module.exports = {
             "A fun way to learn art and crafts and also share your ideas and talent",
           imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRiYrqG1fvvhKf4nyuAItUriMIT1hQipCKHSKURM6Sd9pKxm0nn&usqp=CAU",
-          date: 20082020,
+          date: "2018-01-01T08:00:00.000Z",
           location: "Amstelveen,Netherlands",
           userId: 2,
           createdAt: new Date(),
@@ -46,7 +46,7 @@ module.exports = {
 
           imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQVrHjkokTN_uFeOPM3aIAAlRHOKfoltxKW1CTYCLlSHM8zZ3ks&usqp=CAU",
-          date: 10082020,
+          date: "2018-01-01T08:00:00.000Z",
           location: "Amstelveen,Netherlands",
           userId: 3,
           createdAt: new Date(),
