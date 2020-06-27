@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue: "open",
       },
+      requiredBy: {
+        type: DataType.DATE,
+        allowNull: false,
+      },
     },
     {}
   );
