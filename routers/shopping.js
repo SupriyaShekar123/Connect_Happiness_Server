@@ -3,6 +3,8 @@ const authMiddelware = require("../auth/middleware");
 const Shopping = require("../models/").shoppinglist;
 const User = require("../models/").user;
 
+const helperfunction = require("../routers/generalfunctions");
+
 // var nodemailer = require("nodemailer");
 // const creds = require("../config/conifg");
 // const cron = require("node-cron");
@@ -13,7 +15,7 @@ const router = new Router();
 //console.log("Shopping", Shopping);
 
 router.post("/shopping", async (req, res, next) => {
-  console.log("requested values ", req.body);
+  // console.log("requested values ", req.body);
   try {
     const { category, list, userId, requiredBy } = req.body;
 

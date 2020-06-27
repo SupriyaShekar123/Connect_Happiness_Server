@@ -4,7 +4,7 @@ var router = express.Router();
 var nodemailer = require("nodemailer");
 const creds = require("../config/conifg");
 const User = require("../models/").user;
-const Shopping = require("../models/").shoppinglist;
+
 const { Op } = require("sequelize");
 
 var transport = {
@@ -24,34 +24,6 @@ transporter.verify((error, success) => {
     console.log("Server is ready to take messages");
   }
 });
-
-// router.post("/send", (req, res, next) => {
-//   var name = "Volunteers"; //req.body.name;
-//   var email = "giridhar97@gmail.com"; //req.body.email;
-//   var message = "Help needed in shopping"; //req.body.message;
-//   var content = `name: ${name} \n email: ${email} \n message: ${message} `;
-
-//   var mail = {
-//     from: "connecthappinesssnode@gmail.com",
-//     to: "s.supriya82@gmail.com", //Change to email address that you want to receive messages on
-//     subject: "New Message from Contact Form",
-//     text: content,
-//   };
-
-//   console.log("message", message, name, email);
-
-//   transporter.sendMail(mail, (err, data) => {
-//     if (err) {
-//       res.json({
-//         msg: "fail",
-//       });
-//     } else {
-//       res.json({
-//         msg: "success",
-//       });
-//     }
-//   });
-// });
 
 //*************************************************
 
@@ -99,9 +71,8 @@ router.post("/send", async (req, res, next) => {
     from: "connecthappinesssnode@gmail.com",
     to: emailid, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
     subject: "NEED  ASSISTANCE FOR ",
-    text:
-      "Hello Volunteers, \n Senior citizens, needs assitance for shopping can someone help. please login to the app and connect with respective person or click the below link.\nThanks and Regards,\n Team ConnectHappiness ",
-    html: `<p>Click <a href="http://localhost:3000/shoppingDetails/${spid}">here</a>`,
+    html: `<p>Hello Volunteers, <br> Senior citizens, needs assitance for shopping can someone help. please login to the app and connect with respective person or click the below link.<br>Thanks and Regards,<br> Team ConnectHappiness ,<p>
+     <p>Click <a href="http://localhost:3000/shoppingDetails/${spid}">here</a>`,
   };
 
   //   console.log("message", message, name, email);
