@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "open",
       },
       requiredBy: {
-        type: DataType.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },

@@ -15,15 +15,16 @@ const router = new Router();
 router.post("/shopping", async (req, res, next) => {
   console.log("requested values ", req.body);
   try {
-    const { category, list, userId } = req.body;
+    const { category, list, userId, requiredBy } = req.body;
 
-    if (!category || !list || !userId) {
+    if (!category || !list || !userId || !requiredBy) {
       res.status(400).send("Please fill all the fields");
     } else {
       const shoppinglist = await Shopping.create({
         category,
         list,
         userId,
+        requiredBy,
       });
       res.status(201).json({ ...shoppinglist.dataValues });
     }
