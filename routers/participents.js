@@ -2,6 +2,7 @@ const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const Events = require("../models/").events;
 const Participents = require("../models").participents;
+const User = require("../models").user;
 const { Router } = express;
 
 const router = new Router();
@@ -53,5 +54,20 @@ router.post("/participents", async (req, res) => {
 //     res.json(events);
 //   }
 // });
+
+router.delete("/participents/:userId", async (req, res, next) => {
+  try {
+    const eventsId = parseInt(req.params.userId);
+    const toDelete = await Participents.findByPk(eventsId);
+    if (!toDelete) {
+      res.status(404).send("List not found");
+    } else {
+      const deleted = await toDelete.destroy();
+      res.json(deleted);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
 module.exports = router;
