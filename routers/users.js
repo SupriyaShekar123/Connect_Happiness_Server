@@ -65,15 +65,18 @@ router.get("/volunteer", async function getVolunteers(req, res, next) {
 // });
 
 router.get("/user/:id", async function getShoppingDetails(req, res, next) {
+  console.log("VALUE OF ID", req.params.id);
   const Id = req.params.id;
   try {
     const getData = await User.findByPk(Id, {
       include: [Shopping],
+      order: [[Shopping, "createdAt", "DESC"]],
     });
 
     res.json(getData);
   } catch (e) {
-    next(e);
+    //next(e);
+    console.log("error", e.message);
   }
 });
 

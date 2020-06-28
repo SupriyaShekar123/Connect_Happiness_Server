@@ -2,6 +2,7 @@ const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const Shopping = require("../models/").shoppinglist;
 const User = require("../models/").user;
+const { Op } = require("sequelize");
 
 const helperfunction = require("../routers/generalfunctions");
 
@@ -41,12 +42,17 @@ router.post("/shopping", async (req, res, next) => {
 router.get("/shopping", async function getShoppingList(req, res, next) {
   try {
     const getShoppingLists = await Shopping.findAll({
+      where: {
+        status: {
+          [Op.like]: "%open%",
+        },
+      },
       include: [User],
     });
 
     res.json(getShoppingLists);
   } catch (e) {
-    next(e);
+    console.log("error", e.message);
   }
 });
 

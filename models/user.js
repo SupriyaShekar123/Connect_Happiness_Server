@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   user.associate = function (models) {
     user.hasMany(models.events);
-    user.hasOne(models.shoppinglist);
+    user.hasMany(models.shoppinglist);
 
     // associations can be defined here
   };
