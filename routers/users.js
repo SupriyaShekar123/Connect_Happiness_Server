@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const User = require("../models/").user;
+const Shopping = require("../models/").shoppinglist;
 const { Router } = express;
 const { Op } = require("sequelize");
 
@@ -62,5 +63,18 @@ router.get("/volunteer", async function getVolunteers(req, res, next) {
 //     next(e);
 //   }
 // });
+
+router.get("/user/:id", async function getShoppingDetails(req, res, next) {
+  const Id = req.params.id;
+  try {
+    const getData = await User.findByPk(Id, {
+      include: [Shopping],
+    });
+
+    res.json(getData);
+  } catch (e) {
+    next(e);
+  }
+});
 
 module.exports = router;
