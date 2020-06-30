@@ -92,4 +92,29 @@ router.post("/send", async (req, res, next) => {
 //   task.start();
 // });
 
+router.post("/confirm", async (req, res, next) => {
+  const { email, to, volEmail, volPhone } = req.body;
+  console.log("EMAIL : ", email, "T0 :", to);
+  var mail = {
+    from: "connecthappinesssnode@gmail.com",
+    to: to, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
+    subject: "CONFIRM MESSAGE ",
+    text: email,
+  };
+  //   console.log("message", message, name, email);
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        msg: "fail",
+      });
+    } else {
+      res.json({
+        msg: "success",
+      });
+    }
+  });
+});
+//   task.start();
+// });
+
 module.exports = router;

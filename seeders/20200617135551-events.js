@@ -7,7 +7,8 @@ module.exports = {
       [
         {
           title: "Learn Dutch",
-          detail: "Its for people who want to learn Dutch.",
+          detail:
+            "This group is for anyone interested in learning or improving the Dutch language. From beginners and intermediate to people who are looking to pass the inburgering exam. All language learners are welcome.",
           imageUrl:
             "https://www.taalcoachwijzer.nl/wp-content/uploads/2016/04/SandraEiman-691jpg.jpg",
           date: "2020-01-01T08:00:00.000Z",
@@ -18,7 +19,8 @@ module.exports = {
         },
         {
           title: "Learn to cook",
-          detail: "Its a event where people come and cook together",
+          detail:
+            "If you love eating or cooking, enjoy meeting new people and like to try authentic home cooked dishes, join our events with out talented home chefs.",
           imageUrl:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTyD4zow0BpsUmx8cnEuFPbK5UutHvzMVPUxEl5qit9ZOfEGL7I&usqp=CAU",
           date: "2018-01-01T08:00:00.000Z",

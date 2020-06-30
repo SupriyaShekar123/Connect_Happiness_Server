@@ -243,7 +243,7 @@ transporter.verify((error, success) => {
   }
 });
 
-let task = cron.schedule(" 0 23 * * *", async function () {
+let task = cron.schedule(" 0 10 * * *", async function () {
   const emailid = await helperfunction.getVolunteerEmail();
   const counOfOpenRequest = await helperfunction.checkOpenRequests();
 
