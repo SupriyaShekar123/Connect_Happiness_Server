@@ -25,8 +25,6 @@ transporter.verify((error, success) => {
   }
 });
 
-//*************************************************
-
 async function getVolunteerEmail() {
   try {
     const volunteers = await User.findAll({
@@ -50,23 +48,12 @@ async function getVolunteerEmail() {
 }
 
 router.post("/send", async (req, res, next) => {
-  //   var name = "Volunteers"; //req.body.name;
-  //   var message = "Help needed in shopping"; //req.body.message;
-  //   var content = `name: ${name} \n email: ${email} \n message: ${message} `;
-  //let id = req.body.id;
-
   const { spid } = req.body;
 
   console.log("REQUEST BODY", spid);
 
   let emailid = await getVolunteerEmail();
-  //   console.log("return from funciton :", emailid);
 
-  //   let id = await getShoppingListId();
-  //   console.log("return lists", id);
-  //   let task = cron.schedule("* * * * *", function () {
-  //     console.log("---------------------");
-  //     console.log("Running Cron Job");
   var mail = {
     from: "connecthappinesssnode@gmail.com",
     to: emailid, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
@@ -75,8 +62,6 @@ router.post("/send", async (req, res, next) => {
      <p>Click <a href="http://localhost:3000/shoppingDetails/${spid}">here</a>`,
   };
 
-  //   console.log("message", message, name, email);
-
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
@@ -89,19 +74,17 @@ router.post("/send", async (req, res, next) => {
     }
   });
 });
-//   task.start();
-// });
 
 router.post("/confirm", async (req, res, next) => {
   const { email, to, volEmail, volPhone } = req.body;
   console.log("EMAIL : ", email, "T0 :", to);
   var mail = {
     from: "connecthappinesssnode@gmail.com",
-    to: to, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
+    to: to, //Change to email address that you want to receive messages on
     subject: "CONFIRM MESSAGE ",
     text: email,
   };
-  //   console.log("message", message, name, email);
+
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
@@ -114,7 +97,5 @@ router.post("/confirm", async (req, res, next) => {
     }
   });
 });
-//   task.start();
-// });
 
 module.exports = router;

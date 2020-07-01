@@ -263,11 +263,14 @@ let task = cron.schedule(" 0 10 * * *", async function () {
 
     var mail = {
       from: "connecthappinesssnode@gmail.com",
-      to: emailid, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
+      to: emailid, //Change to email address that you want to receive messages on
       subject: " connect happiness: Need Help ",
-      text:
-        "Hello Volunteers, \n Senior citizens, needs assitance for shopping can someone help. please login to the app and connect with respective person or click the below link.\nThanks and Regards,\n Team ConnectHappiness ",
-      html: `<p>Click <a href="http://localhost:3000/login">here</a>`,
+      html: `Hello Volunteers, <br>
+         There are some open requests please login to the app and connect with respective person or click the below link.
+         <br>
+         Thanks and Regards,<br>
+          Team ConnectHappiness ,
+       <p>Click <a href="http://localhost:3000/login">here</a>`,
     };
 
     //   console.log("message", message, name, email);
