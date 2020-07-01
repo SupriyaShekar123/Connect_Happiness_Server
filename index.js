@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 var nodemailer = require("nodemailer");
 const cron = require("node-cron");
@@ -15,7 +16,7 @@ const Email = require("./routers/nodeMailer");
 const User = require("./routers/users");
 const Reminder = require("./routers/reminder");
 const Participents = require("./routers/participents");
-const cors = require("cors");
+// const cors = require("cors");
 const helperfunction = require("./routers/generalfunctions");
 const creds = require("./config/conifg");
 
