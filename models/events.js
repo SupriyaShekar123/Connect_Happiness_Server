@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const events = sequelize.define(
     "events",
     {
-      title: DataTypes.TEXT,
-      detail: DataTypes.STRING,
-      imageUrl: DataTypes.STRING,
-      date: DataTypes.DATE,
-      location: DataTypes.STRING,
+      title: { type: DataTypes.TEXT, allowNull: false },
+      detail: { type: DataTypes.STRING, allowNull: false },
+      imageUrl: { type: DataTypes.STRING },
+      date: { type: DataTypes.DATE, allowNull: false },
+      location: { type: DataTypes.STRING, allowNull: false },
     },
     {}
   );

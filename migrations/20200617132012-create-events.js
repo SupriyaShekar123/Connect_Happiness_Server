@@ -10,18 +10,22 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       detail: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       imageUrl: {
         type: Sequelize.STRING,
       },
       date: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       location: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

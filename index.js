@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+
+var nodemailer = require("nodemailer");
+const cron = require("node-cron");
 // const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
 const { PORT } = require("./config/constants");
@@ -13,6 +16,8 @@ const User = require("./routers/users");
 const Reminder = require("./routers/reminder");
 const Participents = require("./routers/participents");
 const cors = require("cors");
+const helperfunction = require("./routers/generalfunctions");
+const creds = require("./config/conifg");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -217,3 +222,71 @@ app.use(function (e, req, res, next) {
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+// const { Op } = require("sequelize");
+
+var transport = {
+  host: "smtp.gmail.com",
+  auth: {
+    user: creds.USER,
+    pass: creds.PASS,
+  },
+};
+
+var transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take messages");
+  }
+});
+
+let task = cron.schedule(" 0 10 * * *", async function () {
+  const emailid = await helperfunction.getVolunteerEmail();
+  const counOfOpenRequest = await helperfunction.checkOpenRequests();
+
+  // console.log("TESTING FUNCTION :", counOfOpenRequest, "  , eimail: ", emailid);
+  // console.log("---------------------", emailid);
+  // console.log("Running Cron Job");
+  // console.log("parse idn ", parseInt(counOfOpenRequest) < 1);
+
+  if (
+    emailid === "Fail" ||
+    counOfOpenRequest === "Fail" ||
+    parseInt(counOfOpenRequest) < 1
+  ) {
+    console.log("Fail code executed ");
+  } else {
+    console.log("sucessfull job exeuction");
+
+    var mail = {
+      from: "connecthappinesssnode@gmail.com",
+      to: emailid, //Change to email address that you want to receive messages on
+      subject: " connect happiness: Need Help ",
+      html: `Hello Volunteers, <br>
+         There are some open requests please login to the app and connect with respective person or click the below link.
+         <br>
+         Thanks and Regards,<br>
+          Team ConnectHappiness ,
+       <p>Click <a href="http://localhost:3000/login">here</a>`,
+    };
+
+    //   console.log("message", message, name, email);
+
+    transporter.sendMail(mail, (err, data) => {
+      if (err) {
+        res.json({
+          msg: "fail",
+        });
+      } else {
+        res.json({
+          msg: "success",
+        });
+      }
+    });
+  }
+});
+
+task.start();

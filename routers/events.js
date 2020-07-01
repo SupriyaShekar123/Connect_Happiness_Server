@@ -1,5 +1,5 @@
 const express = require("express");
-const authMiddelware = require("../auth/middleware");
+const auth = require("../auth/middleware");
 const Events = require("../models/").events;
 const Participents = require("../models/").participents;
 const { Router } = express;
@@ -16,18 +16,6 @@ router.get("/events", async function getEventsList(req, res, next) {
   }
 });
 
-//console.log("Events", Events.params);
-
-// router.get("/:id", async function getEventsList(req, res, next) {
-//   try {
-//     const getData = await Events.findAll();
-
-//     res.json(getData);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
 router.get("/events/:id", async (req, res) => {
   const Id = parseInt(req.params.id);
   const events = await Events.findByPk(Id, {
@@ -40,19 +28,7 @@ router.get("/events/:id", async (req, res) => {
   }
 });
 
-// router.get("/events/:id", async (req, res) => {
-//   const Id = parseInt(req.params.id);
-//   const events = await Participents.findByPk(Id, {
-//     include: [Events],
-//   });
-//   if (!events) {
-//     res.status(404).send("Events not found");
-//   } else {
-//     res.json(events);
-//   }
-// });
-
-router.post("/events", async (req, res) => {
+router.post("/events", auth, async (req, res) => {
   // console.log("reqeust body", req.body);
   try {
     const { title, detail, imageUrl, date, location, userId } = req.body;

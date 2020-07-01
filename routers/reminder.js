@@ -3,8 +3,10 @@ var express = require("express");
 var router = express.Router();
 var nodemailer = require("nodemailer");
 const creds = require("../config/conifg");
-//const User = require("../models/").user;
-const Shopping = require("../models/").shoppinglist;
+const User = require("../models/").user;
+
+const helperfunction = require("../routers/generalfunctions");
+
 const { Op } = require("sequelize");
 
 var transport = {
@@ -25,28 +27,6 @@ transporter.verify((error, success) => {
   }
 });
 
-async function getShoppingListDetails() {
-  try {
-    const shoppingLists = await Shopping.findAll({
-      where: {
-        status: {
-          [Op.like]: "%open%",
-        },
-      },
-    });
-    console.log("Shopping Lists", shoppingLists);
-    // const emailID = volunteers.map((t) => {
-    //   //   console.log(t.dataValues.email);
-    //   return (
-    //     //
-    //     t.dataValues.email
-    //   );
-    // });
-    return shoppingLists;
-  } catch (e) {
-    return "Fail";
-  }
-}
 router.post("/reminder", async (req, res, next) => {
   //   var name = "Volunteers"; //req.body.name;
   //   var message = "Help needed in shopping"; //req.body.message;
@@ -57,38 +37,58 @@ router.post("/reminder", async (req, res, next) => {
 
   //console.log("REQUEST BODY", spid);
 
-  //let emailid = await getVolunteerEmail();
   //   console.log("return from funciton :", emailid);
 
   //   let id = await getShoppingListId();
   //   console.log("return lists", id);
-  //   let task = cron.schedule("* * * * *", function () {
-  //     console.log("---------------------");
-  //     console.log("Running Cron Job");
-  var mail = {
-    from: "connecthappinesssnode@gmail.com",
-    to: "s.supriya82@gmail.com", //Change to email address that you want to receive messages on
-    subject: "NEED  ASSISTANCE FOR ",
-    text:
-      "Hello Volunteers, \n Senior citizens, needs assitance for shopping can someone help. please login to the app and connect with respective person or click the below link.\nThanks and Regards,\n Team ConnectHappiness ",
-    html: `<p>Click <a href="http://localhost:3000/login">here</a>`,
-  };
+  let task = cron.schedule(" */5 * * * *", async function () {
+    const emailid = await helperfunction.getVolunteerEmail();
+    const counOfOpenRequest = await helperfunction.checkOpenRequests();
 
-  //   console.log("message", message, name, email);
+    console.log(
+      "TESTING FUNCTION :",
+      counOfOpenRequest,
+      "  , eimail: ",
+      emailid
+    );
+    console.log("---------------------", emailid);
+    console.log("Running Cron Job");
+    console.log("parse idn ", parseInt(counOfOpenRequest) < 1);
 
-  transporter.sendMail(mail, (err, data) => {
-    if (err) {
-      res.json({
-        msg: "fail",
-      });
+    if (
+      emailid === "Fail" ||
+      counOfOpenRequest === "Fail" ||
+      parseInt(counOfOpenRequest) < 1
+    ) {
+      console.log("Fail code executed ");
     } else {
-      res.json({
-        msg: "success",
+      console.log("sucessfull job exeuction");
+
+      var mail = {
+        from: "connecthappinesssnode@gmail.com",
+        to: emailid, //"s.supriya82@gmail.com", //Change to email address that you want to receive messages on
+        subject: " connect happiness: Need Help ",
+        text:
+          "Hello Volunteers, \n Senior citizens, needs assitance for shopping can someone help. please login to the app and connect with respective person or click the below link.\nThanks and Regards,\n Team ConnectHappiness ",
+        html: `<p>Click <a href="http://localhost:3000/login">here</a>`,
+      };
+
+      //   console.log("message", message, name, email);
+
+      transporter.sendMail(mail, (err, data) => {
+        if (err) {
+          res.json({
+            msg: "fail",
+          });
+        } else {
+          res.json({
+            msg: "success",
+          });
+        }
       });
     }
   });
+  task.start();
 });
-//   task.start();
-// });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require("express");
 const authMiddelware = require("../auth/middleware");
 const User = require("../models/").user;
+const Shopping = require("../models/").shoppinglist;
 const { Router } = express;
 const { Op } = require("sequelize");
 
@@ -32,35 +33,20 @@ router.get("/volunteer", async function getVolunteers(req, res, next) {
   }
 });
 
-// router.get("/volunteerEmail", async function getVolunteers(req, res, next) {
-//   try {
-//     const volunteers = await User.findAll({
-//       include: [
-//         {
-//           attributes: ["email"],
-//           where: {
-//             roles: {
-//               [Op.like]: "%volunteer%",
-//             },
-//           },
-//         },
-//       ],
-//     });
+router.get("/user/:id", async function getShoppingDetails(req, res, next) {
+  console.log("VALUE OF ID", req.params.id);
+  const Id = req.params.id;
+  try {
+    const getData = await User.findByPk(Id, {
+      include: [Shopping],
+      order: [[Shopping, "createdAt", "DESC"]],
+    });
 
-//     res.json(volunteers);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-// router.get("/user", async function getVolunteers(req, res, next) {
-//   try {
-//     const volunteers = await User.findAll();
-
-//     res.json(volunteers);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+    res.json(getData);
+  } catch (e) {
+    //next(e);
+    console.log("error", e.message);
+  }
+});
 
 module.exports = router;

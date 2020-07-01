@@ -60,11 +60,13 @@ router.post("/signup", async (req, res) => {
     !dob ||
     !street
   ) {
-    return res.status(400).send("Please provide  all the needed information");
+    return res
+      .status(400)
+      .send({ message: "Please provide  all the needed information" });
   }
 
   try {
-    console.log("this part of code executed ");
+    //console.log("this part of code executed ");
     const newUser = await User.create({
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
