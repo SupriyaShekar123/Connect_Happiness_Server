@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+app.use(cors());
+const jsonParser = express.json();
+app.use(jsonParser);
 
 var nodemailer = require("nodemailer");
 const cron = require("node-cron");
@@ -28,10 +31,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-app.use(cors());
-const jsonParser = express.json();
-app.use(jsonParser);
 
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
